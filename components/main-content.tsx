@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, ArrowRight, Star } from "lucide-react"
 import { Post } from "@/lib/posts"
+import Link from "next/link"
 
 interface MainContentProps {
   posts: Post[]
@@ -53,39 +54,41 @@ export function MainContent({ posts }: MainContentProps) {
 
         <div className="grid gap-6">
           {featuredPosts.map((post) => (
-            <Card key={post.id} className="hover:shadow-md transition-shadow">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Badge variant="secondary">{post.category}</Badge>
-                      {post.featured && (
-                        <Badge variant="default" className="bg-accent text-accent-foreground">
-                          <Star className="w-3 h-3 mr-1" />
-                          精选
-                        </Badge>
-                      )}
+            <Link key={post.id} href={`/posts/${post.slug}`}>
+              <Card className="hover:shadow-md transition-shadow cursor-pointer">
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Badge variant="secondary">{post.category}</Badge>
+                        {post.featured && (
+                          <Badge variant="default" className="bg-accent text-accent-foreground">
+                            <Star className="w-3 h-3 mr-1" />
+                            精选
+                          </Badge>
+                        )}
+                      </div>
+                      <CardTitle className="text-xl mb-2 hover:text-accent transition-colors">
+                        {post.title}
+                      </CardTitle>
                     </div>
-                    <CardTitle className="text-xl mb-2 hover:text-accent cursor-pointer transition-colors">
-                      {post.title}
-                    </CardTitle>
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4 leading-relaxed">{post.excerpt}</p>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    {post.date}
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4 leading-relaxed">{post.excerpt}</p>
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-4 h-4" />
+                      {post.date}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="w-4 h-4" />
+                      {post.readTime}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
-                    {post.readTime}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </Link>
           ))}
         </div>
       </section>
