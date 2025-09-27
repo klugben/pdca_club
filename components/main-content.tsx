@@ -137,6 +137,23 @@ export function MainContent({ posts }: MainContentProps) {
           </CardContent>
         </Card>
       </section>
+
+      {/* 页脚 */}
+      <footer className="border-t pt-8 mt-12">
+        <div className="flex flex-col items-center text-center text-sm text-muted-foreground space-y-2">
+          <p>Copyright © 2025 PDCA进化之路 Powered by 老Z</p>
+          <p>
+            <a
+              href="https://beian.miit.gov.cn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors"
+            >
+              粤ICP备2025473692号-2
+            </a>
+          </p>
+        </div>
+      </footer>
     </main>
   )
 }
